@@ -49,6 +49,20 @@
 
         var map = L.map('map').setView([51.505, -0.09], 13);
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
+
+        function calculateRoute() {
+            var start = document.getElementById('startInput').value;
+            var end = document.getElementById('endInput').value;
+            fetch(`https://api.openrouteservice.org/v2/directions/driving-car?api_key=5b3ce3597851110001cf6248251072a2aec34dc59ce4ad60379d821f&start=${start}&end=${end}`)
+                .then(response => response.json())
+                .then(data => {
+                    var coordinates = data.features[0].geometry.coordinates;
+                    var routePoints = coordinates.map(coord => [coord[1], coord[0]]);
+                    var route = L.polyline(routePoints, {color: 'red'}).addTo(map);
+                    map.fitBounds(route.getBounds());
+                })
+                .catch(error => console.error('Error:', error));
+        }
         
         $(function() {
             $("#searchInput").autocomplete({
