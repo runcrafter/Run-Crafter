@@ -1,3 +1,20 @@
+#map { 
+    height: 500px; 
+    position: relative; 
+    z-index: 1;
+}
+
+#searchContainer { 
+    margin-bottom: 20px; 
+}
+
+.ui-autocomplete { 
+    position: absolute;
+    top: 0;
+    left: 0; 
+    z-index:2;
+}
+
 body, h1, h2, h3, p, ul, li {
     margin: 0;
     padding: 0;
