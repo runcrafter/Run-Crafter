@@ -76,7 +76,7 @@
         }
         
         $(function() {
-            $("#searchInput").autocomplete({
+            $("#startInput").autocomplete({
                 source: function(request, response) {
                     $.ajax({
                         url: "https://nominatim.openstreetmap.org/search?format=json",
@@ -104,6 +104,7 @@
                 }
             });
         });
+
         
         function searchPlace() {
             var query = document.getElementById('searchInput').value;
