@@ -34,6 +34,13 @@ header nav ul li a {
     text-decoration: none;
 }
 
+.styled-link {
+    color: blue; /* Change text color */
+    text-decoration: none; /* Remove underline */
+    font-weight: bold; /* Make text bold */
+    margin-right: 10px; /* Add some spacing between links */
+}
+
 .hero {
     background: url('https://via.placeholder.com/1200x400') center/cover no-repeat;
     color: #fff;
