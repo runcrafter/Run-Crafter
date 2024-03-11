@@ -104,10 +104,6 @@
                     map.setView(latlng, 13);
 
                     $(this).val(ui.item.value);
-
-                    if (marker){
-                        map.removeLayer(marker);
-                    }
                     
                     if ($(this).attr('id') === 'startInput') {
                         if (startMarker) {
