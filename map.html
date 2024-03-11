@@ -62,10 +62,17 @@
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
 
         function calculateRoute() {
-            var start = document.getElementById('startInput').value;
-            var end = document.getElementById('endInput').value;
+            var start = encodeURIComponent(document.getElementById('startInput').value);
+            var end = encodeURIComponent(document.getElementById('endInput').value);
+            var apiKey = '5b3ce3597851110001cf6248251072a2aec34dc59ce4ad60379d821f'; 
             
-            fetch(`https://api.openrouteservice.org/v2/directions/driving-car?api_key=5b3ce3597851110001cf6248251072a2aec34dc59ce4ad60379d821f&start=${start}&end=${end}`)
+            var url = `https://api.openrouteservice.org/v2/directions/driving-car?api_key=${apiKey}&start=${start}&end=${end}`;
+        
+            fetch(url, {
+                headers: {
+                    'Authorization': 'Bearer runcrafter'
+                }
+            })
                 .then(response => {
                     if (!response.ok) {
                         throw new Error('Network response was not ok');
