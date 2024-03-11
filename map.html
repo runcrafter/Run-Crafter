@@ -114,20 +114,14 @@
                         if (endMarker) {
                             map.removeLayer(endMarker);
                         }
-                        endMarker = L.marker(latlng, {icon: redIcon}).addTo(map);
+                        endMarker = L.marker(latlng).addTo(map);
                     }              
                 }
             });
         });
-
-        var redIcon = L.icon({
-            iconUrl: 'https://leafletjs.com/examples/custom-icons/leaf-red.png',
-            iconSize: [38, 95],
-            iconAnchor: [22, 94],
-            popupAnchor: [-3, -76]
-        });
         
-                
+        
+        <!--        
         function searchPlace() {
             var query = document.getElementById('searchInput').value;
             fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${query}`)
@@ -144,6 +138,8 @@
                 })
                 .catch(error => console.error('Error:', error));
         }
+        -->
+            
     </script>
 
 
