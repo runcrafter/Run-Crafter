@@ -76,7 +76,7 @@
         }
         
         $(function() {
-            var marker;
+            var startMarker, endMarker;
             
             $("#startInput, #endInput").autocomplete({
                 source: function(request, response) {
@@ -103,11 +103,23 @@
                     var latlng = [parseFloat(ui.item.lat), parseFloat(ui.item.lon)];
                     map.setView(latlng, 13);
 
+                    $(this).val(ui.item.value);
+
                     if (marker){
                         map.removeLayer(marker);
                     }
                     
-                    marker = L.marker(latlng).addTo(map);
+                    if ($(this).attr('id') === 'startInput') {
+                        if (startMarker) {
+                            map.removeLayer(startMarker);
+                        }
+                        startMarker = L.marker(latlng).addTo(map);
+                    } else if ($(this).attr('id') === 'endInput') {
+                        if (endMarker) {
+                            map.removeLayer(endMarker);
+                        }
+                        endMarker = L.marker(latlng).addTo(map);
+                    }              
                 }
             });
         });
