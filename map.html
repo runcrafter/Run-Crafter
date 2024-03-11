@@ -64,16 +64,32 @@
         function calculateRoute() {
             var start = document.getElementById('startInput').value;
             var end = document.getElementById('endInput').value;
+            
             fetch(`https://api.openrouteservice.org/v2/directions/driving-car?api_key=5b3ce3597851110001cf6248251072a2aec34dc59ce4ad60379d821f&start=${start}&end=${end}`)
-                .then(response => response.json())
-                .then(data => {
-                    var coordinates = data.features[0].geometry.coordinates;
-                    var routePoints = coordinates.map(coord => [coord[1], coord[0]]);
-                    var route = L.polyline(routePoints, {color: 'red'}).addTo(map);
-                    map.fitBounds(route.getBounds());
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.json();
                 })
-                .catch(error => console.error('Error:', error));
+                .then(data => {
+                    console.log('API Response:', data);
+                    
+                    if (data.features && data.features.length > 0) {
+                        var coordinates = data.features[0].geometry.coordinates;
+                        var routePoints = coordinates.map(coord => [coord[1], coord[0]]);
+                        var route = L.polyline(routePoints, {color: 'red'}).addTo(map);
+                        map.fitBounds(route.getBounds());
+                        console.log('Route drawn successfully');
+                    } else {
+                        console.error('No route coordinates found in API response');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error fetching or processing route data:', error);
+                });
         }
+
         
         $(function() {
             var startMarker, endMarker;
