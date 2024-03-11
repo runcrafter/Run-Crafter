@@ -78,7 +78,7 @@
         $(function() {
             var marker;
             
-            $("#startInput").autocomplete({
+            $("#startInput, #endInput").autocomplete({
                 source: function(request, response) {
                     $.ajax({
                         url: "https://nominatim.openstreetmap.org/search?format=json",
