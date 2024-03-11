@@ -114,7 +114,7 @@
                         if (endMarker) {
                             map.removeLayer(endMarker);
                         }
-                        endMarker = L.marker(latlng).addTo(map);
+                        endMarker = L.marker(latlng, {icon: redIcon}).addTo(map);
                     }              
                 }
             });
